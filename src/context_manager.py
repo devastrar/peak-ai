@@ -1,10 +1,6 @@
 import json
 import os
 from datetime import datetime
-from sentence_transformers import SentenceTransformer
-import faiss
-import numpy as np
-model = SentenceTransformer('all-MiniLM-L6-v2')
 def load_memory(project_name: str):
     path = os.path.join("projects", project_name, "memory.json")
     if os.path.exists(path):
@@ -18,4 +14,9 @@ def save_memory(project_name: str, memory: dict):
     with open(path, "w") as f:
         json.dump(memory, f, indent=2)
 def build_context_prompt(memory: dict) -> str:
+    try:
+        from sentence_transformers import SentenceTransformer
+        model = SentenceTransformer('all-MiniLM-L6-v2')
+    except ImportError:
+        model = None
     return f"\n\n=== PROJECT SUMMARY ===\n{memory.get('summary', 'No summary')}\n\n=== KEY DECISIONS ===\n" + "\n".join(memory.get("key_decisions", [])) + "\n=== END CONTEXT ==="
