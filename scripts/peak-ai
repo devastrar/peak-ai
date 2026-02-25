@@ -1,0 +1,4 @@
+#!/bin/bash
+cd "$HOME/peak-ai"
+export PYTHONPATH=".:$HOME/.local/lib/python3.12/site-packages:${PYTHONPATH:-}"
+python3 src/orchestrator.py "$@"
