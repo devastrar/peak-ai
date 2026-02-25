@@ -1,0 +1,7 @@
+[
+  {
+    "key": "ctrl+alt+p",
+    "command": "workbench.action.debug.start",
+    "when": "editorTextFocus"
+  }
+]
