@@ -1,0 +1,8 @@
+{
+  "default_project": "DefaultProject",
+  "version": "7.9",
+  "orchestrator": {
+    "default_model": "kimi-k2.5",
+    "max_tokens": 800
+  }
+}
