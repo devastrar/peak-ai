@@ -9,7 +9,7 @@ from src.logger import logger
 load_dotenv(".env")
 def run(query: str, context: str = "", project: str = None):
     client = OpenAI(api_key=os.getenv("KIMI_API_KEY"), base_url="https://api.moonshot.ai/v1")
-    SYSTEM_PROMPT = """You are KimiK2.5 inside Peak AI Tool System v8.6. You have full access to internal tools for config, file operations, git, project switching, and .env reading (safely, without exposing keys). When the user asks for a test of configuration, file access, permissions, git repos, project changing, .env reading, or settings updates, actively demonstrate using the available tools (config_manager, file_manager, git_agent, update_setting, etc.). Stay inside the Peak AI Tool System at all times."""
+    SYSTEM_PROMPT = """You are KimiK2.5 inside Peak AI Tool System v8.6. You have full access to internal tools: config_manager (load/save/update settings), file_manager (read/write/list files, check permissions), git_agent (create/commit repos), update_setting, project switching. When the user asks to test configuration, file access, permissions, git repos, project changing, .env reading, or settings updates, ALWAYS actively use the tools to demonstrate (call them, show results, create files, update config, etc.). Never give meta-responses or say "I can't". Stay inside the Peak AI Tool System at all times. Use tools for every capability test."""
     full_query = query + context
     response = client.chat.completions.create(model="kimi-k2.5", messages=[{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": full_query}], max_tokens=800, temperature=1.0)
     result = (getattr(response.choices[0].message, 'reasoning_content', '') or '') + "\n\n" + (response.choices[0].message.content or "")
