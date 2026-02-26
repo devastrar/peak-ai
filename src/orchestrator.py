@@ -6,7 +6,7 @@ from datetime import datetime
 from src.config_manager import get_default_project, update_setting
 from src.context_manager import load_memory, save_memory, build_context_prompt
 from src.logger import logger
-load_dotenv("config/.env")
+load_dotenv(".env")
 
 def determine_agent(query: str):
     q = query.lower()
@@ -33,7 +33,7 @@ def main():
     agent = determine_agent(query)
     logger.info(f"Orchestrator - Query: {query} - Project: {project} - Agent: {agent}")
 
-    print(f"🚀 Peak AI Orchestrator v7.9")
+    print(f"🚀 Peak AI Orchestrator v8.6")
     print(f"Query: {query}")
     print(f"Project: {project}")
     print(f"Selected agent: {agent.upper()}")
